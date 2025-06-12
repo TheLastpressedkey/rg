@@ -10,14 +10,14 @@ services:
     plan: free # Utilise le plan gratuit de Render
     buildCommand: npm install # Installe les dépendances du backend
     startCommand: node server/index.js # Démarre le serveur Node.js
-    ports:
-      - 8080 # Le port sur lequel votre serveur Node.js écoute
+    # ports: # Cette ligne et la suivante doivent être supprimées
+    #   - 8080 
     # autoDeploy: true # Render déploie automatiquement par défaut pour les nouveaux services
 
   # Frontend Service (React Static Site)
-  - type: web # Changed from 'static' to 'web'
+  - type: web
     name: collaborative-dashboard-frontend
-    runtime: static # This line is correct for static sites
+    runtime: static
     plan: free # Utilise le plan gratuit de Render
     buildCommand: npm install && npm run build # Installe les dépendances et construit l'application React
     staticPublishPath: dist # Le répertoire où Vite génère les fichiers de build
