@@ -15,9 +15,9 @@ services:
     # autoDeploy: true # Render déploie automatiquement par défaut pour les nouveaux services
 
   # Frontend Service (React Static Site)
-  - type: static
+  - type: web # Changed from 'static' to 'web'
     name: collaborative-dashboard-frontend
-    env: static # Type de service pour les sites statiques
+    runtime: static # This line is correct for static sites
     plan: free # Utilise le plan gratuit de Render
     buildCommand: npm install && npm run build # Installe les dépendances et construit l'application React
     staticPublishPath: dist # Le répertoire où Vite génère les fichiers de build
