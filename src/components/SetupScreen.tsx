@@ -45,14 +45,16 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
     
     setIsLoading(true);
     
-    // Simulate joining game
+    // Simulate joining game - use the exact gameId passed from URL
     setTimeout(() => {
-      onJoinGame(userName.trim(), gameId);
+      console.log('SetupScreen: Joining game with ID:', gameId);
+      onJoinGame(userName.trim(), gameId); // Pass the exact gameId
     }, 500);
   };
 
   const handleStartGame = () => {
     if (!userName.trim() || !createdGameId) return;
+    console.log('SetupScreen: Starting game with ID:', createdGameId);
     onCreateGame(userName.trim());
   };
 
@@ -246,7 +248,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
                   onClick={handleJoinGame}
                   disabled={!userName.trim() || isLoading}
                   className={`
-                    w-full py-3 px-4 rounded-xl font-medium transition-300 transform
+                    w-full py-3 px-4 rounded-xl font-medium transition-all duration-300 transform
                     ${!userName.trim() || isLoading
                       ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
                       : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 active:scale-95'
