@@ -27,6 +27,7 @@ function App() {
     
     if (gameParam) {
       setGameId(gameParam);
+      console.log('Game ID from URL:', gameParam);
     }
   }, []);
 
@@ -47,6 +48,7 @@ function App() {
 
   const handleCreateGame = (userName: string) => {
     const newGameId = Math.random().toString(36).substr(2, 8).toUpperCase();
+    console.log('Creating game with ID:', newGameId);
     setUser(prev => ({ ...prev, name: userName, lastSeen: Date.now() }));
     setGameId(newGameId);
     setGameState('playing');
@@ -56,9 +58,13 @@ function App() {
   };
 
   const handleJoinGame = (userName: string, joinGameId: string) => {
+    console.log('Joining game with ID:', joinGameId);
     setUser(prev => ({ ...prev, name: userName, lastSeen: Date.now() }));
-    setGameId(joinGameId);
+    setGameId(joinGameId); // Use the exact gameId from the URL
     setGameState('playing');
+    
+    // Update URL to reflect the joined game
+    window.history.pushState({}, '', `?game=${joinGameId}`);
   };
 
   const handleClearAllZones = () => {
