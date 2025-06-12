@@ -1,0 +1,20 @@
+# render.yaml
+services:
+  # Backend Service (Node.js WebSocket Server)
+  - type: web
+    name: collaborative-dashboard-backend
+    env: node
+    plan: free # Use the free plan
+    buildCommand: npm install # Install dependencies
+    startCommand: node server/index.js # Start the Node.js server
+    healthCheckPath: / # Optional: Add a health check endpoint if your server has one
+    ports:
+      - 8080 # The port your Node.js server listens on
+
+  # Frontend Service (React Static Site)
+  - type: static
+    name: collaborative-dashboard-frontend
+    env: static # For static sites
+    plan: free # Use the free plan
+    buildCommand: npm install && npm run build # Install dependencies and build the React app
+    staticPublishPath: dist # The directory where Vite outputs the built files
